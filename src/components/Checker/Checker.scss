@@ -2,8 +2,18 @@
   width: 55px;
   height: 55px;
   border-radius: 50px;
-  border: 20px solid #322800;
-  color: #3c3200;
+  border: 20px solid #3c3200;
+  color: #000000;
   margin: 5px;
   cursor: pointer;
+}
+.checker__white {
+  background-color: #fffaeb;
+}
+.checker__black {
+  background-color: #000000;
+}
+.checker__memorized {
+  box-shadow: 0px 0px 10px 5px #f600e9;
+  cursor: pointer !important;
 }

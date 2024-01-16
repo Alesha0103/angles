@@ -2,36 +2,33 @@ import React from 'react'
 import './Cell.scss'
 import { Checker } from '../Checker/Checker'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
+import { makeStep } from '../../store/actions/GeneralActions'
 
 type CellProps = {
   type: string,
-  coordinate?: string,
+  coordinate: string,
 }
 export const Cell: React.FC<CellProps> = ({type, coordinate}) => {
   const dispatch = useAppDispatch();
-  const [checkerColor, setCheckerColor] = React.useState("");
   const { whiteCheckers, blackCheckers } = useAppSelector(state => state.generalReducer);
 
-  React.useEffect(() => {
-    const blackChecker = blackCheckers.find(checker => checker === coordinate);
-    const whiteChecker = whiteCheckers.find(checker => checker === coordinate);
-    if (blackChecker) {
-      setCheckerColor("#3c3200");
-    }
-    if (whiteChecker) {
-      setCheckerColor("#fffaeb")
-    }
-  }, [whiteCheckers, blackCheckers])
+  const checkIfFilling =
+    !!whiteCheckers.find((checker) => checker === coordinate) ||
+    !!blackCheckers.find((checker) => checker === coordinate);
 
   const handleClick = () => {
-    console.log("coordinate ", coordinate)
+    console.log("cell coordinate ", coordinate);
+    if(!checkIfFilling) {
+      dispatch(makeStep(coordinate));
+    }
   }
 
   return (
-    <div className={`cell__${type}`} onClick={handleClick}>
-      {checkerColor && (
-        <Checker checkerColor={checkerColor}/>
-      )}
+    <div className={`cell__${type}`}
+      onClick={handleClick}
+      style={{cursor: !checkIfFilling ? "pointer" : ""}}
+    >
+      <Checker coordinate={coordinate}/>
     </div>
   )
 }
