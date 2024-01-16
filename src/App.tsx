@@ -1,24 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import { board } from './helpers/GenerateChessBoard';
+import { Cell } from './components/Cell/Cell';
 
-function App() {
+const App = () => {
+  const chessBoard = board.getBoard();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <div className="grid">
+        {chessBoard.map(cell => (
+          <Cell key={"key"+cell.coordinate} type={cell.color} coordinate={cell.coordinate}/>
+        ))}
+      </div>
     </div>
   );
 }
