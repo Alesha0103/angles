@@ -32,6 +32,11 @@ const generalSlice = createSlice({
     },
     setTurn(state, action: PayloadAction<string>) {
       state.whoseTurn = action.payload;
+    },
+    reloadApp(state, action: PayloadAction<any>) {
+      state.whiteCheckers = action.payload.whiteCheckers;
+      state.blackCheckers = action.payload.blackCheckers;
+      state.whoseTurn = action.payload.whoseTurn;
     }
   }
 });

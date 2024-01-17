@@ -53,6 +53,13 @@ export const memorizeChecker = (memorizedChecker: MemorizedChecker | null) =>
   generalActions.memorizeChecker(memorizedChecker);
 
 export const setTurn = () => (dispatch: AppDispatch, getState: ()=> RootState) => {
-  const whoseTurn = getState().generalReducer.whoseTurn;
+  const { whoseTurn, whiteCheckers, blackCheckers } = getState().generalReducer;
+
+  localStorage.setItem("whiteCheckers", whiteCheckers.toString());
+  localStorage.setItem("blackCheckers", blackCheckers.toString());
+  localStorage.setItem("whoseTurn", whoseTurn === BLACK ? WHITE : BLACK);
+
   dispatch(generalActions.setTurn(whoseTurn === BLACK ? WHITE : BLACK)); 
 }
+
+export const reloadApp = (data: any) => generalActions.reloadApp(data);
