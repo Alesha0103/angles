@@ -14,13 +14,39 @@ export const makeStep = (coordinate: string) => (dispatch: AppDispatch, getState
     if (indexToRemove !== -1) {
       newCheckers.splice(indexToRemove, 1);
     }
-    dispatch(memorizeChecker({ coordinate, type }));
+    dispatch(memorizeChecker({ type, coordinate }));
     dispatch(
       type === BLACK
-        ? blackStep([...newCheckers, coordinate])
-        : whiteStep([...newCheckers, coordinate])
+        ? generalActions.makeBlackStep([...newCheckers, coordinate])
+        : generalActions.makeWhiteStep([...newCheckers, coordinate])
     );
   }
+}
+
+export const cancelStep = () => (dispatch: AppDispatch, getState: ()=> RootState) => {
+  const { savedCheckers, whoseTurn } = getState().generalReducer;
+
+  if (!!savedCheckers.length) {
+    dispatch(
+      whoseTurn === BLACK
+        ? generalActions.makeBlackStep(savedCheckers)
+        : generalActions.makeWhiteStep(savedCheckers)
+    );
+    dispatch(saveFirstStep(null));
+    dispatch(memorizeChecker(null));
+  }
+}
+
+export const saveFirstStep = (coordinate: string | null) => (dispatch: AppDispatch, getState: ()=> RootState) => {
+  const { blackCheckers, whiteCheckers, whoseTurn } = getState().generalReducer;
+  if (!coordinate) {
+    dispatch(generalActions.saveFirstStep(null));
+    dispatch(generalActions.memorizeChecker(null));
+    dispatch(generalActions.saveCheckers([]));
+    return;
+  }
+  dispatch(generalActions.saveFirstStep(coordinate));
+  dispatch(generalActions.saveCheckers(whoseTurn === BLACK ? blackCheckers : whiteCheckers));
 }
 
 export const memorizeChecker = (memorizedChecker: MemorizedChecker | null) => 
@@ -30,6 +56,3 @@ export const setTurn = () => (dispatch: AppDispatch, getState: ()=> RootState) =
   const whoseTurn = getState().generalReducer.whoseTurn;
   dispatch(generalActions.setTurn(whoseTurn === BLACK ? WHITE : BLACK)); 
 }
-
-export const whiteStep = (checkers: string[]) => generalActions.makeWhiteStep(checkers);
-export const blackStep = (checkers: string[]) => generalActions.makeBlackStep(checkers);

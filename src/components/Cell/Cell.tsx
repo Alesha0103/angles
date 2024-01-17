@@ -2,7 +2,10 @@ import React from 'react'
 import './Cell.scss'
 import { Checker } from '../Checker/Checker'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
-import { makeStep } from '../../store/actions/GeneralActions'
+import {
+  cancelStep,
+  makeStep
+} from '../../store/actions/GeneralActions'
 
 type CellProps = {
   type: string,
@@ -10,16 +13,20 @@ type CellProps = {
 }
 export const Cell: React.FC<CellProps> = ({type, coordinate}) => {
   const dispatch = useAppDispatch();
-  const { whiteCheckers, blackCheckers, whoseTurn } = useAppSelector(state => state.generalReducer);
+  const { whiteCheckers, blackCheckers, savedStep, savedCheckers } = useAppSelector(state => state.generalReducer);
 
   const checkIfFilling =
     !!whiteCheckers.find((checker) => checker === coordinate) ||
     !!blackCheckers.find((checker) => checker === coordinate);
 
   const handleClick = () => {
+    if (savedStep === coordinate) {
+      dispatch(cancelStep());
+      return;
+    }
     if(!checkIfFilling) {
-      console.log('whoseTurn :>> ', whoseTurn);
       dispatch(makeStep(coordinate));
+      return;
     }
   }
 

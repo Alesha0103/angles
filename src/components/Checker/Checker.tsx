@@ -1,7 +1,12 @@
 import React from 'react'
 import './Checker.scss'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { memorizeChecker, setTurn } from '../../store/actions/GeneralActions';
+import {
+  cancelStep,
+  memorizeChecker,
+  saveFirstStep,
+  setTurn,
+} from "../../store/actions/GeneralActions";
 import classNames from 'classnames';
 import { BLACK, WHITE } from '../../helpers/constants';
 
@@ -11,7 +16,7 @@ type CheckerProps = {
 export const Checker:React.FC<CheckerProps> = ({coordinate}) => {
   const dispatch = useAppDispatch();
   const [checkerColor, setCheckerColor] = React.useState("");
-  const { whiteCheckers, blackCheckers, memorizedChecker, whoseTurn } = useAppSelector(state => state.generalReducer);
+  const { whiteCheckers, blackCheckers, memorizedChecker, savedStep, whoseTurn } = useAppSelector(state => state.generalReducer);
 
   React.useEffect(() => {
     const blackChecker = blackCheckers.find(checker => checker === coordinate);
@@ -25,19 +30,30 @@ export const Checker:React.FC<CheckerProps> = ({coordinate}) => {
       return;
     }
     setCheckerColor("");
-  }, [whiteCheckers, blackCheckers, memorizedChecker])
+  }, [whiteCheckers, blackCheckers, whoseTurn])
+
+  const finishStep = () => {
+    if (memorizedChecker?.coordinate !== savedStep) {
+      dispatch(setTurn());
+    }
+    dispatch(saveFirstStep(null));
+  }
 
   const handleClick = () => {
     if (checkerColor === whoseTurn) {
+      if (memorizedChecker?.coordinate === savedStep) {
+        dispatch(cancelStep());
+        return;
+      }
       if (memorizedChecker?.coordinate === coordinate) {
-        dispatch(memorizeChecker(null));
-        dispatch(setTurn());
+        finishStep();
         return;
       }
       if (!!memorizedChecker) {
         return;
       }
       dispatch(memorizeChecker({ type: checkerColor, coordinate}));
+      dispatch(saveFirstStep(coordinate));
     }
   }
 
