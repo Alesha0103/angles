@@ -10,15 +10,15 @@ type CellProps = {
 }
 export const Cell: React.FC<CellProps> = ({type, coordinate}) => {
   const dispatch = useAppDispatch();
-  const { whiteCheckers, blackCheckers } = useAppSelector(state => state.generalReducer);
+  const { whiteCheckers, blackCheckers, whoseTurn } = useAppSelector(state => state.generalReducer);
 
   const checkIfFilling =
     !!whiteCheckers.find((checker) => checker === coordinate) ||
     !!blackCheckers.find((checker) => checker === coordinate);
 
   const handleClick = () => {
-    console.log("cell coordinate ", coordinate);
     if(!checkIfFilling) {
+      console.log('whoseTurn :>> ', whoseTurn);
       dispatch(makeStep(coordinate));
     }
   }

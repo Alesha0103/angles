@@ -6,8 +6,7 @@ import { useAppSelector } from './hooks/redux';
 
 const App = () => {
   const checkerBoard = board.getBoard();
-  const { whiteCheckers, blackCheckers } = useAppSelector(state => state.generalReducer);
-  console.log('blackCheckers :>> ', blackCheckers);
+  // const { whiteCheckers, blackCheckers, memorizedChecker } = useAppSelector(state => state.generalReducer);
 
   return (
     <div className="app">
