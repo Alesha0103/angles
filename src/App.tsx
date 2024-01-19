@@ -25,17 +25,11 @@ const App = () => {
     whiteCheckers,
     blackCheckers,
     whoseTurn,
-    savedStep,
     savedCheckers,
     memorizedChecker
   } = useAppSelector(state => state.generalReducer);
 
   const prevTurn = usePrevious(whoseTurn);
-
-  console.log('savedCheckers :>> ', savedCheckers);
-  console.log('memorizedChecker :>> ', memorizedChecker);
-  console.log('savedStep :>> ', savedStep);
-  console.log('prevTurn :>> ', prevTurn);
 
   React.useEffect(() => {
     const whiteCheckersStorage = localStorage.getItem("whiteCheckers");
@@ -58,10 +52,11 @@ const App = () => {
   //   localStorage.setItem("whoseTurn", whoseTurn);
   // }, [whiteCheckers, blackCheckers, whoseTurn])
 
-  const checkIfCancelNeed = () => {
-    if (memorizedChecker || (prevTurn === whoseTurn)) {
-      return null;
-    }
+  const checkIfButtonDisabled = () => {
+    if (!savedCheckers.length) return true;
+    return whoseTurn === WHITE ? 
+      whiteCheckers.every(element => savedCheckers.includes(element))
+      : blackCheckers.every(element => savedCheckers.includes(element));
   }
 
   const onClickHandle = () => {
@@ -71,7 +66,7 @@ const App = () => {
   return (
     <div className="app">
       <button
-        // disabled={ifDisabled()}
+        disabled={checkIfButtonDisabled()}
         style={{
           padding: "10px",
           position: "absolute",

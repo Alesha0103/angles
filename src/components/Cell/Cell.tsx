@@ -13,7 +13,7 @@ type CellProps = {
 }
 export const Cell: React.FC<CellProps> = ({type, coordinate}) => {
   const dispatch = useAppDispatch();
-  const { whiteCheckers, blackCheckers, savedStep, savedCheckers } = useAppSelector(state => state.generalReducer);
+  const { whiteCheckers, blackCheckers, savedStep } = useAppSelector(state => state.generalReducer);
 
   const checkIfFilling =
     !!whiteCheckers.find((checker) => checker === coordinate) ||

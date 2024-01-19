@@ -41,10 +41,6 @@ export const Checker:React.FC<CheckerProps> = ({coordinate}) => {
 
   const handleClick = () => {
     if (checkerColor === whoseTurn) {
-      if (memorizedChecker?.coordinate === savedStep) {
-        dispatch(cancelStep());
-        return;
-      }
       if (memorizedChecker?.coordinate === coordinate) {
         finishStep();
         return;
@@ -70,7 +66,7 @@ export const Checker:React.FC<CheckerProps> = ({coordinate}) => {
       })}
       style={{
         backgroundColor: checkerColor,
-        cursor: !!memorizedChecker ||  (checkerColor !== whoseTurn)? "default" : ""
+        cursor: !!memorizedChecker ||  (checkerColor !== whoseTurn) ? "default" : ""
       }}
       onClick={handleClick}
     />

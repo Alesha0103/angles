@@ -24,9 +24,7 @@ export const makeStep = (coordinate: string) => (dispatch: AppDispatch, getState
 }
 
 export const cancelStep = (stepBack?: boolean) => (dispatch: AppDispatch, getState: ()=> RootState) => {
-  const { savedCheckers, whoseTurn, memorizedChecker } = getState().generalReducer;
-
-  console.log('stepBack :>> ', stepBack);
+  const { savedCheckers, whoseTurn } = getState().generalReducer;
 
   if (stepBack) {
     console.log("cancel custom");
