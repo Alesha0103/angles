@@ -23,10 +23,24 @@ export const makeStep = (coordinate: string) => (dispatch: AppDispatch, getState
   }
 }
 
-export const cancelStep = () => (dispatch: AppDispatch, getState: ()=> RootState) => {
-  const { savedCheckers, whoseTurn } = getState().generalReducer;
+export const cancelStep = (stepBack?: boolean) => (dispatch: AppDispatch, getState: ()=> RootState) => {
+  const { savedCheckers, whoseTurn, memorizedChecker } = getState().generalReducer;
+
+  console.log('stepBack :>> ', stepBack);
+
+  if (stepBack) {
+    console.log("cancel custom");
+    dispatch(setTurn());
+    dispatch(
+      whoseTurn === WHITE
+        ? generalActions.makeBlackStep(savedCheckers)
+        : generalActions.makeWhiteStep(savedCheckers)
+    );
+    return;
+  }
 
   if (!!savedCheckers.length) {
+    console.log("cancel default");
     dispatch(
       whoseTurn === BLACK
         ? generalActions.makeBlackStep(savedCheckers)
@@ -42,7 +56,6 @@ export const saveFirstStep = (coordinate: string | null) => (dispatch: AppDispat
   if (!coordinate) {
     dispatch(generalActions.saveFirstStep(null));
     dispatch(generalActions.memorizeChecker(null));
-    dispatch(generalActions.saveCheckers([]));
     return;
   }
   dispatch(generalActions.saveFirstStep(coordinate));
@@ -55,9 +68,9 @@ export const memorizeChecker = (memorizedChecker: MemorizedChecker | null) =>
 export const setTurn = () => (dispatch: AppDispatch, getState: ()=> RootState) => {
   const { whoseTurn, whiteCheckers, blackCheckers } = getState().generalReducer;
 
-  localStorage.setItem("whiteCheckers", whiteCheckers.toString());
-  localStorage.setItem("blackCheckers", blackCheckers.toString());
-  localStorage.setItem("whoseTurn", whoseTurn === BLACK ? WHITE : BLACK);
+  // localStorage.setItem("whiteCheckers", whiteCheckers.toString());
+  // localStorage.setItem("blackCheckers", blackCheckers.toString());
+  // localStorage.setItem("whoseTurn", whoseTurn === BLACK ? WHITE : BLACK);
 
   dispatch(generalActions.setTurn(whoseTurn === BLACK ? WHITE : BLACK)); 
 }

@@ -70,7 +70,7 @@ export const Checker:React.FC<CheckerProps> = ({coordinate}) => {
       })}
       style={{
         backgroundColor: checkerColor,
-        cursor: !!memorizedChecker ? "default" : ""
+        cursor: !!memorizedChecker ||  (checkerColor !== whoseTurn)? "default" : ""
       }}
       onClick={handleClick}
     />
