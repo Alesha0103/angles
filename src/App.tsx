@@ -5,31 +5,14 @@ import { Cell } from './components/Cell/Cell';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
 import { cancelStep, reloadApp } from './store/actions/GeneralActions';
 import { BLACK, WHITE } from './helpers/constants';
-
-export const usePrevious = (value: any) => {
-  const currentRef = React.useRef(value)
-  const previousRef = React.useRef()
-  if (currentRef.current !== value) {
-      previousRef.current = currentRef.current
-      currentRef.current = value
-  }
-  return previousRef.current
-}
+import classNames from 'classnames';
+import { Buttons } from './components/Buttons/Buttons';
 
 const App = () => {
   const checkerBoard = board.getBoard();
-
   const dispatch = useAppDispatch();
 
-  const {
-    whiteCheckers,
-    blackCheckers,
-    whoseTurn,
-    savedCheckers,
-    memorizedChecker
-  } = useAppSelector(state => state.generalReducer);
-
-  const prevTurn = usePrevious(whoseTurn);
+  const { rotate } = useAppSelector(state => state.generalReducer);
 
   React.useEffect(() => {
     const whiteCheckersStorage = localStorage.getItem("whiteCheckers");
@@ -52,32 +35,10 @@ const App = () => {
   //   localStorage.setItem("whoseTurn", whoseTurn);
   // }, [whiteCheckers, blackCheckers, whoseTurn])
 
-  const checkIfButtonDisabled = () => {
-    if (!savedCheckers.length) return true;
-    return whoseTurn === WHITE ? 
-      whiteCheckers.every(element => savedCheckers.includes(element))
-      : blackCheckers.every(element => savedCheckers.includes(element));
-  }
-
-  const onClickHandle = () => {
-    dispatch(cancelStep(memorizedChecker || (prevTurn === whoseTurn) ? undefined : true));
-  }
-
   return (
     <div className="app">
-      <button
-        disabled={checkIfButtonDisabled()}
-        style={{
-          padding: "10px",
-          position: "absolute",
-          top: "5px",
-          cursor: "pointer",
-        }}
-        onClick={onClickHandle}
-      >
-        cancel step
-      </button>
-      <div className="grid">
+      <Buttons/>
+      <div className={classNames("grid", {"grid__rotate": rotate})}>
         {checkerBoard.map((cell) => (
           <Cell
             key={"key" + cell.coordinate}

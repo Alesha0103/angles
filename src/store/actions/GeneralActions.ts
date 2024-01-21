@@ -34,6 +34,7 @@ export const cancelStep = (stepBack?: boolean) => (dispatch: AppDispatch, getSta
         ? generalActions.makeBlackStep(savedCheckers)
         : generalActions.makeWhiteStep(savedCheckers)
     );
+    // dispatch(rotateBoard());
     return;
   }
 
@@ -74,3 +75,4 @@ export const setTurn = () => (dispatch: AppDispatch, getState: ()=> RootState) =
 }
 
 export const reloadApp = (data: any) => generalActions.reloadApp(data);
+export const rotateBoard = () => generalActions.rotateBoard();

@@ -1,0 +1,22 @@
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 840px;
+  position: absolute;
+  top: 20px;
+}
+.buttons button {
+  width: 110px;
+  padding: 10px;
+  cursor: pointer;
+  border: 2px solid #194178;
+  color: #194178;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 10px;
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+}

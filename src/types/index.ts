@@ -5,6 +5,7 @@ export type CheckersState = {
   savedStep: string | null,
   savedCheckers: string[],
   whoseTurn: string,
+  rotate: boolean,
 }
 export type MemorizedChecker = {
   type: string,

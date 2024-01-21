@@ -9,6 +9,7 @@ const initialState: CheckersState = {
   savedStep: null,
   savedCheckers: [],
   whoseTurn: WHITE,
+  rotate: false,
 }
 
 const generalSlice = createSlice({
@@ -37,7 +38,10 @@ const generalSlice = createSlice({
       state.whiteCheckers = action.payload.whiteCheckers;
       state.blackCheckers = action.payload.blackCheckers;
       state.whoseTurn = action.payload.whoseTurn;
-    }
+    },
+    rotateBoard(state) {
+      state.rotate = !state.rotate;
+    },
   }
 });
 

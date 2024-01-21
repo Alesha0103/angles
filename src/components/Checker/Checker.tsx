@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
   cancelStep,
   memorizeChecker,
+  rotateBoard,
   saveFirstStep,
   setTurn,
 } from "../../store/actions/GeneralActions";
@@ -43,6 +44,7 @@ export const Checker:React.FC<CheckerProps> = ({coordinate}) => {
     if (checkerColor === whoseTurn) {
       if (memorizedChecker?.coordinate === coordinate) {
         finishStep();
+        // dispatch(rotateBoard())
         return;
       }
       if (!!memorizedChecker) {
