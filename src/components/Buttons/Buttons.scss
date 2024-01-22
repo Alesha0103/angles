@@ -9,14 +9,15 @@
   width: 110px;
   padding: 10px;
   cursor: pointer;
-  border: 2px solid #194178;
-  color: #194178;
+  border: none;
+  color: #282828;
+  background-color: white;
   font-size: 14px;
   font-weight: bold;
   border-radius: 10px;
 
   &:disabled {
-    opacity: 0.3;
+    opacity: 0;
     cursor: default;
   }
 }
