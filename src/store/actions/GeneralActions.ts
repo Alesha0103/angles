@@ -34,7 +34,6 @@ export const cancelStep = (stepBack?: boolean) => (dispatch: AppDispatch, getSta
         ? generalActions.makeBlackStep(savedCheckers)
         : generalActions.makeWhiteStep(savedCheckers)
     );
-    // dispatch(rotateBoard());
     return;
   }
 
@@ -67,12 +66,16 @@ export const memorizeChecker = (memorizedChecker: MemorizedChecker | null) =>
 export const setTurn = () => (dispatch: AppDispatch, getState: ()=> RootState) => {
   const { whoseTurn, whiteCheckers, blackCheckers } = getState().generalReducer;
 
-  // localStorage.setItem("whiteCheckers", whiteCheckers.toString());
-  // localStorage.setItem("blackCheckers", blackCheckers.toString());
-  // localStorage.setItem("whoseTurn", whoseTurn === BLACK ? WHITE : BLACK);
+  localStorage.setItem("whiteCheckers", whiteCheckers.toString());
+  localStorage.setItem("blackCheckers", blackCheckers.toString());
+  localStorage.setItem("whoseTurn", whoseTurn === BLACK ? WHITE : BLACK);
 
   dispatch(generalActions.setTurn(whoseTurn === BLACK ? WHITE : BLACK)); 
 }
 
 export const reloadApp = (data: any) => generalActions.reloadApp(data);
 export const rotateBoard = () => generalActions.rotateBoard();
+export const resetApp = () => {
+  localStorage.clear();
+  return generalActions.resetApp()
+};

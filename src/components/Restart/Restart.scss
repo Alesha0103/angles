@@ -1,0 +1,41 @@
+.restart {
+  color: white !important;
+  background-color: red !important;
+}
+
+.restart__answers {
+  align-self: center;
+}
+
+.restart__answers button {
+  padding: 0;
+  color: red !important;
+  font-size: 18px;
+  background-color: transparent;
+  width: 55px;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+@media (min-width: 1150px) {
+  .restart, .restart__answers {
+    position: absolute;
+    left: -125px;
+  }
+  .restart__answers {
+    top: 49vh;
+  }
+  .restart {
+    width: 100px !important;
+    height: 100px !important;
+    border-radius: 50px !important;
+    font-size: 14px !important;
+    top: 45vh;
+  }
+}
+@media (min-width: 1350px) {
+  .restart, .restart__answers {
+    left: -250px;
+  }
+}

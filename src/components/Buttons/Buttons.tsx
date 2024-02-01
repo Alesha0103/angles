@@ -5,6 +5,7 @@ import { usePrevious } from '../../hooks/usePrevious';
 import { WHITE } from '../../helpers/constants';
 
 import "./Buttons.scss";
+import { Restart } from '../Restart/Restart';
 
 export const Buttons = () => {
 
@@ -38,11 +39,16 @@ export const Buttons = () => {
       <button
         disabled={checkIfButtonDisabled()}
         onClick={onCancelClick}
+        className="buttons__default"
       >
-        cancel step
+        Cancel step
       </button>
-      <button onClick={onRotateClick}>
-        rotate
+      <Restart/>
+      <button
+        onClick={onRotateClick}
+        className="buttons__default"
+      >
+        Rotate
       </button>
     </div>
   )

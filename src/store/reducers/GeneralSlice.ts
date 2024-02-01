@@ -42,6 +42,9 @@ const generalSlice = createSlice({
     rotateBoard(state) {
       state.rotate = !state.rotate;
     },
+    resetApp() {
+      return initialState;
+    }
   }
 });
 

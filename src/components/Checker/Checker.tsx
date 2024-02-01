@@ -44,7 +44,6 @@ export const Checker:React.FC<CheckerProps> = ({coordinate}) => {
     if (checkerColor === whoseTurn) {
       if (memorizedChecker?.coordinate === coordinate) {
         finishStep();
-        // dispatch(rotateBoard())
         return;
       }
       if (!!memorizedChecker) {

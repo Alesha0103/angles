@@ -29,12 +29,6 @@ const App = () => {
     }
   }, [])
 
-  // React.useEffect(() => {
-  //   localStorage.setItem("whiteCheckers", whiteCheckers.toString());
-  //   localStorage.setItem("blackCheckers", blackCheckers.toString());
-  //   localStorage.setItem("whoseTurn", whoseTurn);
-  // }, [whiteCheckers, blackCheckers, whoseTurn])
-
   return (
     <div className="app">
       <Buttons/>
