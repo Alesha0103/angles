@@ -1,24 +1,84 @@
 .buttons {
+  width: 95%;
+  margin: auto; 
   display: flex;
   justify-content: space-between;
-  width: 840px;
-  position: absolute;
-  top: 20px;
+  margin-top: 40px;
+  margin-bottom: 20px;
 }
-.buttons button {
+.buttons .buttons__default {
   width: 110px;
   padding: 10px;
   cursor: pointer;
   border: none;
-  color: #282828;
-  background-color: white;
+  color: white;
   font-size: 14px;
   font-weight: bold;
-  border-radius: 10px;
+
+  box-shadow: inset 2px 2px 2px white;
 
   &:disabled {
-    background-color: #393939;
-    color: black;
+    background-color: transparent;
     cursor: default;
+  }
+}
+
+@media (max-width: 640px) {
+  .buttons .buttons__default {
+    font-size: 11px;
+    width: 90px;
+  }
+}
+
+@media (max-width: 370px) {
+  .buttons .buttons__default {
+    padding: 0;
+    font-size: 11px;
+    width: 80px;
+  }
+}
+
+@media (hover: hover) {
+  .buttons .buttons__default {
+    &:hover {
+      animation: onHover 1s forwards;
+    }
+    &:disabled {
+      &:hover {
+        animation: none;
+      }
+    }
+  }
+}
+
+@media (hover: none) {
+  .buttons .buttons__default {
+    &:active {
+      box-shadow:
+        2px 4px 5px #f93535,
+        -2px -3px 5px #f93535;
+      color: #f93535;
+    }
+    // &:disabled {
+    //   box-shadow: inset 2px 2px 2px white;
+    //   color: white;
+    // }
+
+    // Cancel step не правильный стиль в мобилках при клике!!!
+  }
+}
+
+@keyframes onHover {
+0% {
+  box-shadow:
+    0px 2px 2px #f93535,
+    0px -1px 2px #f93535;
+  color: #f93535;
+}
+100% {
+    box-shadow:
+      2px 4px 5px #f93535,
+      -2px -3px 5px #f93535;
+    color: #f93535;
   }
 }

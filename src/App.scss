@@ -7,15 +7,45 @@
 .app {
   max-width: 840px;
   margin: auto;
-  margin-top: 80px;
-  border: 3px solid grey;
 }
 .grid {
+  width: fit-content;
+  margin: auto;
   display: grid;
   grid-template-columns: repeat(8, 105px);
   grid-template-rows: repeat(8, 105px);
+  border: 3px solid grey;
 }
 
 .grid__rotate {
   transform: rotate(180deg);
+}
+
+@media (max-width: 840px) {
+  .grid {
+    grid-template-columns: repeat(8, 80px);
+    grid-template-rows: repeat(8, 80px);
+    margin-top: 100px;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(8, 60px);
+    grid-template-rows: repeat(8, 60px);
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: repeat(8, 45px);
+    grid-template-rows: repeat(8, 45px);
+  }
+}
+
+@media (max-width: 370px) {
+  .grid {
+    grid-template-columns: repeat(8, 35px);
+    grid-template-rows: repeat(8, 35px);
+  }
 }
