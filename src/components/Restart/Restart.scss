@@ -1,4 +1,4 @@
-.restart {
+#restart {
   width: 110px;
   color: #282828;
   background-color: #f93535;
@@ -7,10 +7,6 @@
   padding: 5px;
   font-weight: bold;
   cursor: pointer;
-  // &:hover {
-  //   transform: scale(1.05);
-  //   border-radius: 7px;
-  // }
 }
 
 .restart__answers {
@@ -31,14 +27,14 @@
 }
 
 @media (min-width: 1150px) {
-  .restart, .restart__answers {
+  #restart, .restart__answers {
     position: absolute;
     left: 50px;
   }
   .restart__answers {
     top: 49vh;
   }
-  .restart {
+  #restart {
     width: 100px !important;
     height: 100px !important;
     border-radius: 50px !important;
@@ -49,7 +45,7 @@
   }
 }
 @media (min-width: 1350px) {
-  .restart, .restart__answers {
+  #restart, .restart__answers {
     left: 150px;
   }
 }
@@ -58,11 +54,32 @@
     font-size: 14px;
     width: 40px;
   }
-  .restart {
+  #restart {
     padding: 0;
     border-width: 3px;
     font-size: 11px;
     width: 90px;
     border-radius: 7px;
+  }
+}
+
+@media (hover: hover) {
+  #restart:hover {
+    animation: restartOnHover 0.5s linear forwards;
+  }
+}
+
+@keyframes restartOnHover {
+  50% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+@media (max-width: 1150px) {
+  #restart:hover {
+    animation: none;
   }
 }

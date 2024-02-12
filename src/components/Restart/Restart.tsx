@@ -7,10 +7,14 @@ import { resetApp } from '../../store/actions/GeneralActions';
 export const Restart = () => {
   const dispatch = useAppDispatch();
   const [question, setQuestion] = React.useState(false);
-  const confirmButtonRef = React.useRef<any>(null);
-  const rejectButtonRef = React.useRef<any>(null);
+  const answersRef = React.useRef<any>(null);
+  const restartRef = React.useRef<any>(null);
 
   React.useEffect(() => {
+    if (!question) {
+      const restartElement = document.getElementById("restart");
+      restartRef.current = restartElement;
+    }
     if (question) {
       document.addEventListener('click', handleClickOutside);
     }
@@ -32,29 +36,28 @@ export const Restart = () => {
   }
 
   const handleClickOutside = (event: any) => {
-    console.log('event :>> ', event.target);
-    console.log('confirmButtonRef.current :>> ', confirmButtonRef.current);
-    console.log('rejectButtonRef.current :>> ', rejectButtonRef.current);
     if (
-      // (confirmButtonRef.current && !confirmButtonRef.current.contains(event.target)) ||
-      (rejectButtonRef.current && rejectButtonRef.current.contains(event.target))
-    ) {
-      setQuestion(false);
+        answersRef.current &&
+        !answersRef.current.contains(event.target) &&
+        restartRef.current &&
+        !restartRef.current.contains(event.target)
+      ) {
+      rejectReset();
     }
   }
 
   if (question) {
     return (
-      <div className="restart__answers">
-        <button onClick={resetGame} ref={confirmButtonRef}>Yes</button>
-        <button onClick={rejectReset} ref={rejectButtonRef}>No</button>
+      <div className="restart__answers" ref={answersRef}>
+        <button onClick={resetGame}>Yes</button>
+        <button onClick={rejectReset}>No</button>
       </div>
     )
   }
 
   return (
     <button
-      className="restart"
+      id="restart"
       onClick={onRestartClick}
     >
       Restart

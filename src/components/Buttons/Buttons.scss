@@ -59,12 +59,10 @@
         -2px -3px 5px #f93535;
       color: #f93535;
     }
-    // &:disabled {
-    //   box-shadow: inset 2px 2px 2px white;
-    //   color: white;
-    // }
-
-    // Cancel step не правильный стиль в мобилках при клике!!!
+    &:disabled {
+      box-shadow: inset 2px 2px 2px #f93535;
+      color: #f93535;
+    }
   }
 }
 
