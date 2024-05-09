@@ -63,21 +63,6 @@
   }
 }
 
-@media (hover: hover) {
-  #restart:hover {
-    animation: restartOnHover 0.5s linear forwards;
-  }
-}
-
-@keyframes restartOnHover {
-  50% {
-    transform: scale(1.03);
-  }
-  100% {
-    transform: scale(1.05);
-  }
-}
-
 @media (max-width: 1150px) {
   #restart:hover {
     animation: none;

@@ -6,6 +6,7 @@ import {
   cancelStep,
   makeStep
 } from '../../store/actions/GeneralActions'
+import { useNextStep } from '../../hooks/useNextStep'
 
 type CellProps = {
   type: string,
@@ -13,7 +14,9 @@ type CellProps = {
 }
 export const Cell: React.FC<CellProps> = ({type, coordinate}) => {
   const dispatch = useAppDispatch();
-  const { whiteCheckers, blackCheckers, savedStep } = useAppSelector(state => state.generalReducer);
+  const { whiteCheckers, blackCheckers, savedStep, memorizedChecker } = useAppSelector(state => state.generalReducer);
+
+  const nextSteps = useNextStep();
 
   const checkIfFilling =
     !!whiteCheckers.find((checker) => checker === coordinate) ||
@@ -24,7 +27,10 @@ export const Cell: React.FC<CellProps> = ({type, coordinate}) => {
       dispatch(cancelStep());
       return;
     }
-    if(!checkIfFilling) {
+    if(
+      !checkIfFilling &&
+      nextSteps.includes(coordinate)
+    ) {
       dispatch(makeStep(coordinate));
       return;
     }

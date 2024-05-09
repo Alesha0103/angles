@@ -10,16 +10,15 @@
   width: 110px;
   padding: 10px;
   cursor: pointer;
-  border: none;
-  color: white;
+  border: 2px solid transparent;
+  color: #f93535;
   font-size: 14px;
   font-weight: bold;
-
-  box-shadow: inset 2px 2px 2px white;
 
   &:disabled {
     background-color: transparent;
     cursor: default;
+    opacity: 0.5;
   }
 }
 
@@ -41,42 +40,13 @@
 @media (hover: hover) {
   .buttons .buttons__default {
     &:hover {
-      animation: onHover 1s forwards;
+      border-bottom-color: #f93535;
     }
     &:disabled {
       &:hover {
         animation: none;
+        border-bottom-color: transparent;
       }
     }
-  }
-}
-
-@media (hover: none) {
-  .buttons .buttons__default {
-    &:active {
-      box-shadow:
-        2px 4px 5px #f93535,
-        -2px -3px 5px #f93535;
-      color: #f93535;
-    }
-    &:disabled {
-      box-shadow: inset 2px 2px 2px #f93535;
-      color: #f93535;
-    }
-  }
-}
-
-@keyframes onHover {
-0% {
-  box-shadow:
-    0px 2px 2px #f93535,
-    0px -1px 2px #f93535;
-  color: #f93535;
-}
-100% {
-    box-shadow:
-      2px 4px 5px #f93535,
-      -2px -3px 5px #f93535;
-    color: #f93535;
   }
 }

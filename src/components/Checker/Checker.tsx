@@ -17,7 +17,13 @@ type CheckerProps = {
 export const Checker:React.FC<CheckerProps> = ({coordinate}) => {
   const dispatch = useAppDispatch();
   const [checkerColor, setCheckerColor] = React.useState("");
-  const { whiteCheckers, blackCheckers, memorizedChecker, savedStep, whoseTurn } = useAppSelector(state => state.generalReducer);
+  const {
+    whiteCheckers,
+    blackCheckers,
+    memorizedChecker,
+    savedStep,
+    whoseTurn
+  } = useAppSelector(state => state.generalReducer);
 
   React.useEffect(() => {
     const blackChecker = blackCheckers.find(checker => checker === coordinate);
@@ -38,6 +44,7 @@ export const Checker:React.FC<CheckerProps> = ({coordinate}) => {
       dispatch(setTurn());
     }
     dispatch(saveFirstStep(null));
+    dispatch(memorizeChecker(null));
   }
 
   const handleClick = () => {
@@ -49,7 +56,7 @@ export const Checker:React.FC<CheckerProps> = ({coordinate}) => {
       if (!!memorizedChecker) {
         return;
       }
-      dispatch(memorizeChecker({ type: checkerColor, coordinate}));
+      dispatch(memorizeChecker({ type: checkerColor, coordinate }));
       dispatch(saveFirstStep(coordinate));
     }
   }
