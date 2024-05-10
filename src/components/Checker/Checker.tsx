@@ -22,7 +22,7 @@ export const Checker:React.FC<CheckerProps> = ({ coordinate, type }) => {
 
   const handleClick = () => {
     if (type === whoseTurn) {
-      if (coordinate === memorizedChecker?.coordinate) {
+      if (memorizedChecker?.coordinate) {
         return;
       }
 

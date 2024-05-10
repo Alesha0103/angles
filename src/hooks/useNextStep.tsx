@@ -22,7 +22,8 @@ export const useNextStep = () => {
       const foundNextSteps = findPossibleSteps(memorizedChecker.coordinate, false);
       setNextSteps([...foundNextSteps]);
     }
+  // eslint-disable-next-line
   }, [memorizedChecker]);
 
-  return nextSteps;
+  return { nextSteps };
 }

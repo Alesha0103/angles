@@ -2,7 +2,6 @@ import React from 'react'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { cancelStep, cancelStepButton, rotateBoard } from '../../store/actions/GeneralActions';
 import { usePrevious } from '../../hooks/usePrevious';
-import { WHITE } from '../../helpers/constants';
 
 import "./Buttons.scss";
 import { Restart } from '../Restart/Restart';
@@ -13,8 +12,6 @@ export const Buttons = () => {
   const {
     whoseTurn,
     memorizedChecker,
-    whiteCheckers,
-    blackCheckers,
     savedCheckers
   } = useAppSelector(state => state.generalReducer);
 

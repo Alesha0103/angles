@@ -28,6 +28,7 @@ const App = () => {
       dispatch(reloadApp(data));
     }
     setLoader(false);
+  // eslint-disable-next-line
   }, [])
 
   if (loader) return null;

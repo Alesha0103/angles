@@ -51,6 +51,10 @@ const checkNextCoordinateY = (possibleCoords: string[], coord: string, firstStep
 }
 
 export const findPossibleSteps = (coordinate: string, firstStep?: boolean) => {
+  if (!coordinate) {
+    return [];
+  }
+
   let gridRaw = [];
   let gridColumn = [];
   let possibleStepsX = [];

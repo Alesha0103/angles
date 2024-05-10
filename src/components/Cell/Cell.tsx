@@ -11,6 +11,7 @@ import {
 } from '../../store/actions/GeneralActions'
 import { useNextStep } from '../../hooks/useNextStep'
 import { BLACK, WHITE } from '../../helpers/constants'
+import classNames from 'classnames'
 
 type CellProps = {
   type: string,
@@ -18,9 +19,10 @@ type CellProps = {
 }
 export const Cell: React.FC<CellProps> = ({type, coordinate}) => {
   const dispatch = useAppDispatch();
+  const [ border, setBorder ] = React.useState(false);
   const { whiteCheckers, blackCheckers, savedStep, memorizedChecker } = useAppSelector(state => state.generalReducer);
 
-  const nextSteps = useNextStep();
+  const { nextSteps } = useNextStep();
 
   const checkIfFilling = (): string => {
     const checkWhiteFilling = whiteCheckers.find((checker) => checker === coordinate);
@@ -58,7 +60,9 @@ export const Cell: React.FC<CellProps> = ({type, coordinate}) => {
   }
 
   return (
-    <div className={`cell__${type}`}
+    <div className={classNames(`cell__${type}`, {
+        "cell_red_border": !!nextSteps.includes(coordinate)
+      })}
       onClick={handleClick}
       style={{cursor: !checkIfFilling() ? "pointer" : ""}}
     >
