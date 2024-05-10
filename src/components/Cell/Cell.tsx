@@ -4,9 +4,13 @@ import { Checker } from '../Checker/Checker'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import {
   cancelStep,
-  makeStep
+  makeStep,
+  memorizeChecker,
+  saveFirstStep,
+  setTurn
 } from '../../store/actions/GeneralActions'
 import { useNextStep } from '../../hooks/useNextStep'
+import { BLACK, WHITE } from '../../helpers/constants'
 
 type CellProps = {
   type: string,
@@ -18,30 +22,49 @@ export const Cell: React.FC<CellProps> = ({type, coordinate}) => {
 
   const nextSteps = useNextStep();
 
-  const checkIfFilling =
-    !!whiteCheckers.find((checker) => checker === coordinate) ||
-    !!blackCheckers.find((checker) => checker === coordinate);
+  const checkIfFilling = (): string => {
+    const checkWhiteFilling = whiteCheckers.find((checker) => checker === coordinate);
+    const checkBlackFilling = blackCheckers.find((checker) => checker === coordinate);
+
+    if (!!checkWhiteFilling) {
+      return WHITE;
+    }
+    if (!!checkBlackFilling) {
+      return BLACK;
+    }
+  
+    return "";
+  }
+
+  const finishStep = () => {
+    console.log("finishStep");
+    if (memorizedChecker?.coordinate !== savedStep) {
+      dispatch(setTurn());
+    }
+    dispatch(saveFirstStep(null));
+    dispatch(memorizeChecker(null));
+  }
 
   const handleClick = () => {
-    if (savedStep === coordinate) {
-      dispatch(cancelStep());
-      return;
+    if (coordinate === memorizedChecker?.coordinate) {
+      finishStep();
     }
-    if(
-      !checkIfFilling &&
-      nextSteps.includes(coordinate)
-    ) {
+    if (coordinate === savedStep) {
+      dispatch(cancelStep());
+    }
+    if (nextSteps.includes(coordinate)) {
       dispatch(makeStep(coordinate));
-      return;
     }
   }
 
   return (
     <div className={`cell__${type}`}
       onClick={handleClick}
-      style={{cursor: !checkIfFilling ? "pointer" : ""}}
+      style={{cursor: !checkIfFilling() ? "pointer" : ""}}
     >
-      <Checker coordinate={coordinate}/>
+      {checkIfFilling() && (
+        <Checker coordinate={coordinate} type={checkIfFilling()}/>
+      )}
     </div>
   )
 }

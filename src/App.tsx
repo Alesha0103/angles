@@ -3,8 +3,7 @@ import './App.scss';
 import { board } from './helpers/GenerateChessBoard';
 import { Cell } from './components/Cell/Cell';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
-import { cancelStep, reloadApp } from './store/actions/GeneralActions';
-import { BLACK, WHITE } from './helpers/constants';
+import { reloadApp } from './store/actions/GeneralActions';
 import classNames from 'classnames';
 import { Buttons } from './components/Buttons/Buttons';
 
@@ -12,6 +11,7 @@ const App = () => {
   const checkerBoard = board.getBoard();
   const dispatch = useAppDispatch();
 
+  const [loader, setLoader] = React.useState(true);
   const { rotate } = useAppSelector(state => state.generalReducer);
 
   React.useEffect(() => {
@@ -27,7 +27,10 @@ const App = () => {
       }
       dispatch(reloadApp(data));
     }
+    setLoader(false);
   }, [])
+
+  if (loader) return null;
 
   return (
     <div className="app">

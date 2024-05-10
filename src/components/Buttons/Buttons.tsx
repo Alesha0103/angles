@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { cancelStep, rotateBoard } from '../../store/actions/GeneralActions';
+import { cancelStep, cancelStepButton, rotateBoard } from '../../store/actions/GeneralActions';
 import { usePrevious } from '../../hooks/usePrevious';
 import { WHITE } from '../../helpers/constants';
 
@@ -20,15 +20,13 @@ export const Buttons = () => {
 
   const prevTurn = usePrevious(whoseTurn);
 
-  const checkIfButtonDisabled = () => {
-    if (!savedCheckers.length) return true;
-    return whoseTurn === WHITE ? 
-      whiteCheckers.every(element => savedCheckers.includes(element))
-      : blackCheckers.every(element => savedCheckers.includes(element));
-  }
-
   const onCancelClick = () => {
-    dispatch(cancelStep(memorizedChecker || (prevTurn === whoseTurn) ? undefined : true));
+    if (memorizedChecker) {
+      dispatch(cancelStep());
+    }
+    if (!memorizedChecker && prevTurn && prevTurn !== whoseTurn) {
+      dispatch(cancelStepButton());
+    }
   }
   const onRotateClick = () => {
     dispatch(rotateBoard());
@@ -37,7 +35,7 @@ export const Buttons = () => {
   return (
     <div className="buttons">
       <button
-        disabled={checkIfButtonDisabled()}
+        disabled={!savedCheckers.length}
         onClick={onCancelClick}
         className="buttons__default"
       >

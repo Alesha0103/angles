@@ -8,8 +8,10 @@ export const useNextStep = () => {
   const { savedStep, memorizedChecker, whoseTurn } = useAppSelector(state => state.generalReducer);
 
   React.useEffect(() => {
+    if (!savedStep) {
+      setNextSteps([]);
+    }
     if (savedStep) {
-      console.log("React.useEffect savedStep");
       const foundFirstStep = findPossibleSteps(savedStep);
       setNextSteps([...foundFirstStep]);
     }
@@ -17,7 +19,6 @@ export const useNextStep = () => {
 
   React.useEffect(() => {
     if (memorizedChecker && !!nextSteps?.length) {
-      console.log("React.useEffect memorizedChecker");
       const foundNextSteps = findPossibleSteps(memorizedChecker.coordinate, false);
       setNextSteps([...foundNextSteps]);
     }
