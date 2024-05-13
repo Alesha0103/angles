@@ -38,7 +38,9 @@ export const Buttons = () => {
       >
         Cancel step
       </button>
-      <Restart/>
+
+      <Restart />
+
       <button
         onClick={onRotateClick}
         className="buttons__default"

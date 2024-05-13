@@ -3,7 +3,6 @@
   margin: auto; 
   display: flex;
   justify-content: space-between;
-  margin-top: 40px;
   margin-bottom: 20px;
 }
 .buttons .buttons__default {
@@ -16,26 +15,48 @@
   font-weight: bold;
 
   &:disabled {
-    background-color: transparent;
     cursor: default;
     opacity: 0.5;
   }
 }
 
-@media (max-width: 640px) {
-  .buttons .buttons__default {
-    font-size: 11px;
-    width: 90px;
-  }
-}
+// @media (max-width: 1100px) {}
+// .buttons {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   width: 100px;
+//   position: absolute;
+//   left: -200px;
+//   top: 20vh;
+// }
 
-@media (max-width: 370px) {
-  .buttons .buttons__default {
-    padding: 0;
-    font-size: 11px;
-    width: 80px;
-  }
-}
+// .buttons .buttons__default {
+//   width: 90px;
+//   height: 90px;
+//   border-radius: 50px;
+//   font-size: 14px;
+//   border: 7px solid #a00000;
+//   background-color: #f93535;
+//   font-weight: bold;
+//   color: #393939;
+//   cursor: pointer;
+
+//   &:disabled {
+//     cursor: default;
+//     opacity: 0.5;
+//   }
+// }
+
+// @media (max-width: 1260px) {
+//   .buttons {
+//     left: -120px;
+//   }
+// }
+// @media (max-width: 1100px) {
+//   .buttons {
+//   }
+// }
 
 @media (hover: hover) {
   .buttons .buttons__default {

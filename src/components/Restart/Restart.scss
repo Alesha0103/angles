@@ -8,63 +8,31 @@
   font-weight: bold;
   cursor: pointer;
 }
+// #restart {
+//   width: 100px;
+//   height: 100px;
+//   border-radius: 50px;
+//   font-size: 14px;
+//   border: 10px solid #a00000;
+//   background-color: #f93535;
+//   font-weight: bold;
+//   color: #393939;
+//   cursor: pointer;
+//   margin: 50px 0;
+// }
 
-.restart__answers {
-  align-self: center;
-}
+// .restart__answers {
+//   display: flex;
+//   align-self: center;
+//   height: 100px;
+//   margin: 50px 0;
 
-.restart__answers button {
-  padding: 0;
-  color: #f93535 !important;
-  font-size: 18px;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  width: 55px;
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
-@media (min-width: 1150px) {
-  #restart, .restart__answers {
-    position: absolute;
-    left: 50px;
-  }
-  .restart__answers {
-    top: 49vh;
-  }
-  #restart {
-    width: 100px !important;
-    height: 100px !important;
-    border-radius: 50px !important;
-    font-size: 14px !important;
-    border: 10px solid #a00000 !important;
-    color: #393939 !important;
-    top: 45vh;
-  }
-}
-@media (min-width: 1350px) {
-  #restart, .restart__answers {
-    left: 150px;
-  }
-}
-@media (max-width: 640px) {
-  .restart__answers button {
-    font-size: 14px;
-    width: 40px;
-  }
-  #restart {
-    padding: 0;
-    border-width: 3px;
-    font-size: 11px;
-    width: 90px;
-    border-radius: 7px;
-  }
-}
-
-@media (max-width: 1150px) {
-  #restart:hover {
-    animation: none;
-  }
-}
+//   button {
+//     color: #f93535;
+//     font-size: 18px;
+//     background-color: transparent;
+//     border: none;
+//     cursor: pointer;
+//     width: 55px;
+//   }
+// }
