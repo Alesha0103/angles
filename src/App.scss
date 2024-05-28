@@ -7,7 +7,6 @@
 .app {
   max-width: 840px;
   margin: auto;
-  // margin-top: 50px;
   margin-top: 20px;
   position: relative;
 }
@@ -50,5 +49,11 @@
   .grid {
     grid-template-columns: repeat(8, 35px);
     grid-template-rows: repeat(8, 35px);
+  }
+}
+
+@media (min-width: 1100px) {
+  .app {
+    margin-top: 50px;
   }
 }

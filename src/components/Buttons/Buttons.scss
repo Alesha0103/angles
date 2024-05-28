@@ -20,53 +20,64 @@
   }
 }
 
-// @media (max-width: 1100px) {}
-// .buttons {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   width: 100px;
-//   position: absolute;
-//   left: -200px;
-//   top: 20vh;
-// }
+@media (min-width: 1100px) {
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100px;
+    position: absolute;
+    left: -125px;
+    top: 170px;
 
-// .buttons .buttons__default {
-//   width: 90px;
-//   height: 90px;
-//   border-radius: 50px;
-//   font-size: 14px;
-//   border: 7px solid #a00000;
-//   background-color: #f93535;
-//   font-weight: bold;
-//   color: #393939;
-//   cursor: pointer;
+    .buttons__default {
+      width: 100px;
+      height: 100px;
+      border-radius: 50px;
+      font-size: 14px;
+      border: 10px solid #a00000;
+      background-color: #f93535;
+      font-weight: bold;
+      color: #780000;
+      cursor: pointer;
+    
+      &:disabled {
+        cursor: default;
+        opacity: 0.5;
+      }
+    }
+  }
+}
 
-//   &:disabled {
-//     cursor: default;
-//     opacity: 0.5;
-//   }
-// }
-
-// @media (max-width: 1260px) {
-//   .buttons {
-//     left: -120px;
-//   }
-// }
-// @media (max-width: 1100px) {
-//   .buttons {
-//   }
-// }
+@media (min-width: 1260px) {
+  .buttons {
+    left: -200px;
+  }
+}
 
 @media (hover: hover) {
-  .buttons .buttons__default {
-    &:hover {
-      border-bottom-color: #f93535;
-    }
-    &:disabled {
+  @media (max-width: 1100px) {
+    .buttons .buttons__default {
       &:hover {
-        animation: none;
-        border-bottom-color: transparent;
+        border-bottom-color: #f93535;
+      }
+      &:disabled {
+        &:hover {
+          animation: none;
+          border-bottom-color: transparent;
+        }
+      }
+    }
+  }
+  @media (min-width: 1100px) {
+    .buttons .buttons__default {
+      &:hover {
+        background-color: #fb5a5a;
+      }
+      &:disabled {
+        &:hover {
+          background-color: #f93535;
+        }
       }
     }
   }
