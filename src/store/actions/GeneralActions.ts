@@ -14,7 +14,6 @@ export const makeStep = (coordinate: string) => (dispatch: AppDispatch, getState
     if (indexToRemove !== -1) {
       newCheckers.splice(indexToRemove, 1);
     }
-    console.log('memorized checker :>> ', { type, coordinate });
     dispatch(memorizeChecker({ type, coordinate }));
     dispatch(
       type === BLACK

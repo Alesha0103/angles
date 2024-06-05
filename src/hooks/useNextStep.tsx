@@ -3,7 +3,7 @@ import { useAppSelector } from './redux';
 import { findPossibleSteps } from '../helpers/FindPossibleSteps';
 
 export const useNextStep = () => {
-  const [nextSteps, setNextSteps] = React.useState<string[]>([]);
+  const [nextSteps, setNextSteps] = React.useState<any[]>([]);
 
   const { savedStep, memorizedChecker, whoseTurn } = useAppSelector(state => state.generalReducer);
 
@@ -13,17 +13,33 @@ export const useNextStep = () => {
     }
     if (savedStep) {
       const foundFirstStep = findPossibleSteps(savedStep);
-      setNextSteps([...foundFirstStep]);
+      setNextSteps([ ...foundFirstStep ]);
     }
-  }, [savedStep, whoseTurn]);
-
-  React.useEffect(() => {
-    if (memorizedChecker && !!nextSteps?.length) {
-      const foundNextSteps = findPossibleSteps(memorizedChecker.coordinate, false);
-      setNextSteps([...foundNextSteps]);
+    if (savedStep && !!nextSteps?.length) {
+      checkFoundSteps(nextSteps);
     }
-  // eslint-disable-next-line
-  }, [memorizedChecker]);
+  }, [savedStep, whoseTurn, nextSteps?.length]);
 
-  return { nextSteps };
+  const checkFoundSteps = (steps: any[]) => {
+    const allSteps = steps.map((el: any) => {
+      if (!el?.jumped) {
+        return el;
+      }
+      return findPossibleSteps(el, false);
+    })?.flat();
+
+    // @ts-ignore
+    const result = [...new Set([...steps, ...allSteps])];
+  
+    const uniqueResult = result.filter((value, index, self) => {
+      if (typeof value === 'object') {
+        return index === self.findIndex(obj => obj.coordinate === value.coordinate && obj.jumped === value.jumped);
+      }
+      return self.indexOf(value) === index;
+    });
+
+    setNextSteps(uniqueResult);
+  };
+
+  return { nextSteps: nextSteps?.map(el => !!el.coordinate ? el.coordinate : el) }
 }

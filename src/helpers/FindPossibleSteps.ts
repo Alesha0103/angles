@@ -16,13 +16,13 @@ const checkNextCoordinateX = (possibleCoords: string[], coord: string, firstStep
     result.push(previousElement);
   }
   if (!previousElement && beforePreviousElement) {
-    result.push(beforePreviousElement);
+    result.push({ coordinate: beforePreviousElement, jumped: true });
   }
   if (nextElement && firstStep) {
     result.push(nextElement);
   }
   if (!nextElement && afterNextElement) {
-    result.push(afterNextElement);
+    result.push({ coordinate: afterNextElement, jumped: true });
   }
   return result;
 }
@@ -39,18 +39,20 @@ const checkNextCoordinateY = (possibleCoords: string[], coord: string, firstStep
     result.push(previousElement);
   }
   if (!previousElement && beforePreviousElement) {
-    result.push(beforePreviousElement);
+    result.push({ coordinate: beforePreviousElement, jumped: true });
   }
   if (nextElement && firstStep) {
     result.push(nextElement);
   }
   if (!nextElement && afterNextElement) {
-    result.push(afterNextElement);
+    result.push({ coordinate: afterNextElement, jumped: true });
   }
   return result;
 }
 
-export const findPossibleSteps = (coordinate: string, firstStep?: boolean) => {
+export const findPossibleSteps = (coordinateObj: any, firstStep?: boolean) => {
+  const coordinate = coordinateObj?.coordinate ? coordinateObj?.coordinate : coordinateObj
+
   if (!coordinate) {
     return [];
   }
@@ -108,5 +110,3 @@ export const findPossibleSteps = (coordinate: string, firstStep?: boolean) => {
 
   return result;
 }
-
-/// Сделать чтоб не только следующий шаг возвращался, но и следующий и следующий...
