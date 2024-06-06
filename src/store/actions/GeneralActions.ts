@@ -82,3 +82,4 @@ export const resetApp = () => {
   localStorage.clear();
   return generalActions.resetApp()
 }; // good
+export const setTips = (state: boolean) => generalActions.setTips(state); // good

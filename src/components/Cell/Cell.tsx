@@ -1,26 +1,32 @@
-import React from 'react'
-import './Cell.scss'
-import { Checker } from '../Checker/Checker'
-import { useAppDispatch, useAppSelector } from '../../hooks/redux'
+import React from "react"
+import "./Cell.scss"
+import { Checker } from "../Checker/Checker"
+import { useAppDispatch, useAppSelector } from "../../hooks/redux"
 import {
   cancelStep,
   makeStep,
   memorizeChecker,
   saveFirstStep,
   setTurn
-} from '../../store/actions/GeneralActions'
-import { useNextStep } from '../../hooks/useNextStep'
-import { BLACK, WHITE } from '../../helpers/constants'
-import classNames from 'classnames'
+} from "../../store/actions/GeneralActions"
+import { useNextStep } from "../../hooks/useNextStep"
+import { BLACK, WHITE } from "../../helpers/constants"
+import classNames from "classnames";
 
 type CellProps = {
   type: string,
   coordinate: string,
 }
+
 export const Cell: React.FC<CellProps> = ({type, coordinate}) => {
   const dispatch = useAppDispatch();
-  const [ border, setBorder ] = React.useState(false);
-  const { whiteCheckers, blackCheckers, savedStep, memorizedChecker } = useAppSelector(state => state.generalReducer);
+  const {
+    whiteCheckers,
+    blackCheckers,
+    savedStep,
+    memorizedChecker,
+    tips
+  } = useAppSelector(state => state.generalReducer);
 
   const { nextSteps } = useNextStep();
 
@@ -61,7 +67,7 @@ export const Cell: React.FC<CellProps> = ({type, coordinate}) => {
 
   return (
     <div className={classNames(`cell__${type}`, {
-        "cell_red_border": !!nextSteps.includes(coordinate)
+        "cell_red_border": !!nextSteps.includes(coordinate) && tips
       })}
       onClick={handleClick}
       style={{cursor: !checkIfFilling() ? "pointer" : ""}}

@@ -1,11 +1,11 @@
 import React from 'react'
 import { useAppSelector } from './redux';
-import { findPossibleSteps } from '../helpers/FindPossibleSteps';
+import { findPossibleSteps, CoordinateObj } from '../helpers/FindPossibleSteps';
 
 export const useNextStep = () => {
   const [nextSteps, setNextSteps] = React.useState<any[]>([]);
 
-  const { savedStep, memorizedChecker, whoseTurn } = useAppSelector(state => state.generalReducer);
+  const { savedStep, whoseTurn } = useAppSelector(state => state.generalReducer);
 
   React.useEffect(() => {
     if (!savedStep) {
@@ -18,11 +18,12 @@ export const useNextStep = () => {
     if (savedStep && !!nextSteps?.length) {
       checkFoundSteps(nextSteps);
     }
+    // eslint-disable-next-line
   }, [savedStep, whoseTurn, nextSteps?.length]);
 
   const checkFoundSteps = (steps: any[]) => {
-    const allSteps = steps.map((el: any) => {
-      if (!el?.jumped) {
+    const allSteps = steps.map((el: CoordinateObj | string) => {
+      if (typeof el === "string") {
         return el;
       }
       return findPossibleSteps(el, false);

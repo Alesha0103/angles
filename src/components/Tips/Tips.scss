@@ -1,0 +1,114 @@
+#tips {
+  width: 55px;
+  height: 55px;
+  border-radius: 100px;
+
+  color: #f93535;
+  background-color: #282828;;
+  border: 3px solid #d50000;
+
+  font-weight: bold;
+  font-size: 12px;
+  cursor: pointer;
+
+  display: block;
+  margin: 50px auto;
+}
+.tips__question {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px auto;
+
+  label {
+    color: #f93535;
+    font-size: 16px;
+    align-self: center;
+  }
+
+  button {
+    color: #f93535;
+    font-size: 16px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    width: 40px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 640px) {
+  #tips {
+    width: 50px;
+    height: 50px;
+    font-size: 12px;
+    margin: 35px auto;
+  }
+  .tips__question {
+    margin: 35px auto;
+    label , button {
+      font-size: 12px;
+    }
+  }
+}
+
+@media (min-width: 640px) {
+  #tips {
+    width: 65px;
+    height: 65px;
+    border-width: 4px;
+  }
+  .tips__question {
+    height: 65px;
+  }
+}
+
+@media (min-width: 840px) {
+  #tips {
+    width: 70px;
+    height: 70px;
+    border-width: 5px;
+    font-size: 14px;
+  }
+  .tips__question {
+    height: 70px;
+  }
+}
+
+@media (min-width: 1100px) {
+  #tips {
+    position: absolute;
+    right: -120px;
+    top: 385px;
+    margin: 0;
+    background-color: #f93535;
+    color: #780000;
+    &:hover {
+      background-color: #fb5a5a;
+    }
+  }
+  .tips__question {
+    position: absolute;
+    right: -125px;
+    top: 340px;
+  }
+}
+@media (min-width: 1260px) {
+  #tips {
+    right: -150px;
+    width: 80px;
+    height: 80px;
+    font-size: 16px;
+  }
+  .tips__question {
+    right: -150px;
+    top: 345px;
+  }
+}
+
+@media (hover: hover) {
+  .tips__answers button:hover {
+    border-bottom-color: #f93535;
+  }
+}

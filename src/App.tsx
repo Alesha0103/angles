@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from './hooks/redux';
 import { reloadApp } from './store/actions/GeneralActions';
 import classNames from 'classnames';
 import { Buttons } from './components/Buttons/Buttons';
+import { Tips } from './components/Tips/Tips';
 
 const App = () => {
   const checkerBoard = board.getBoard();
@@ -45,6 +46,7 @@ const App = () => {
           />
         ))}
       </div>
+      <Tips/>
     </div>
   );
 }

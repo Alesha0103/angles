@@ -10,6 +10,7 @@ const initialState: CheckersState = {
   savedCheckers: [],
   whoseTurn: WHITE,
   rotate: false,
+  tips: false,
 }
 
 const generalSlice = createSlice({
@@ -33,6 +34,9 @@ const generalSlice = createSlice({
     },
     setTurn(state, action: PayloadAction<string>) {
       state.whoseTurn = action.payload;
+    },
+    setTips(state, action: PayloadAction<boolean>) {
+      state.tips = action.payload;
     },
     reloadApp(state, action: PayloadAction<any>) {
       state.whiteCheckers = action.payload.whiteCheckers;

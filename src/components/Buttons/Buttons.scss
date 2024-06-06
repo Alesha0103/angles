@@ -6,17 +6,32 @@
   margin-bottom: 20px;
 }
 .buttons .buttons__default {
-  width: 110px;
-  padding: 10px;
+  width: 100px;
+  padding: 8px;
   cursor: pointer;
   border: 2px solid transparent;
   color: #f93535;
-  font-size: 14px;
+  font-size: 10px;
   font-weight: bold;
 
   &:disabled {
     cursor: default;
     opacity: 0.5;
+  }
+}
+
+@media (min-width: 375px) {
+  .buttons .buttons__default {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 640px) {
+  .buttons .buttons__default {
+    width: 110px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 14px;
   }
 }
 

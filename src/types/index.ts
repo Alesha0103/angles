@@ -6,6 +6,7 @@ export type CheckersState = {
   savedCheckers: string[],
   whoseTurn: string,
   rotate: boolean,
+  tips: boolean,
 }
 export type MemorizedChecker = {
   type: string,

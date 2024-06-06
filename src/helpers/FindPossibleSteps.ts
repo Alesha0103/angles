@@ -1,5 +1,10 @@
 import { store } from "../store";
 
+export type CoordinateObj = {
+  coordinate: string,
+  jumped: boolean,
+}
+
 const checkNextCoordinateX = (possibleCoords: string[], coord: string, firstStep: boolean = true) => {
   let result = [];
   const alphabetToNumber = (letter: string) => letter.charCodeAt(0) - 64;
@@ -50,8 +55,8 @@ const checkNextCoordinateY = (possibleCoords: string[], coord: string, firstStep
   return result;
 }
 
-export const findPossibleSteps = (coordinateObj: any, firstStep?: boolean) => {
-  const coordinate = coordinateObj?.coordinate ? coordinateObj?.coordinate : coordinateObj
+export const findPossibleSteps = (coordinateObj: CoordinateObj | string, firstStep?: boolean) => {
+  const coordinate: string = typeof coordinateObj === "object" ? coordinateObj.coordinate : coordinateObj
 
   if (!coordinate) {
     return [];

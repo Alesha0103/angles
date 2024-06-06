@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
 import "./Restart.scss";
-import { useAppDispatch } from '../../hooks/redux';
-import { resetApp } from '../../store/actions/GeneralActions';
+import { useAppDispatch } from "../../hooks/redux";
+import { resetApp } from "../../store/actions/GeneralActions";
 
 export const Restart = () => {
   const dispatch = useAppDispatch();
@@ -16,11 +16,12 @@ export const Restart = () => {
       restartRef.current = restartElement;
     }
     if (question) {
-      document.addEventListener('click', handleClickOutside);
+      document.addEventListener("click", handleClickOutside);
     }
     return () => {
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener("click", handleClickOutside);
     };
+    // eslint-disable-next-line
   }, [question])
 
   const onRestartClick = () => {
@@ -49,6 +50,7 @@ export const Restart = () => {
   if (question) {
     return (
       <div className="restart__answers" ref={answersRef}>
+        <label>Are you sure?</label>
         <button onClick={resetGame}>Yes</button>
         <button onClick={rejectReset}>No</button>
       </div>
