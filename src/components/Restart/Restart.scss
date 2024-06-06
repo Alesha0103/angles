@@ -49,6 +49,7 @@ $restart-margin: 100px 0;
   #restart {
     width: 110px;
     font-size: 14px;
+    border-width: 5px
   }
   .restart__answers {
     label {
@@ -81,8 +82,8 @@ $restart-margin: 100px 0;
 
     label {
       position: absolute;
-      top: 215px;
-      left: 5px;
+      top: 220px;
+      left: 10px;
     }
     button {
       height: 40px;
@@ -94,5 +95,10 @@ $restart-margin: 100px 0;
 @media (hover: hover) {
   .restart__answers button:hover {
     border-bottom-color: #f93535;
+  }
+  @media (min-width: 1100px) {
+    #restart:hover {
+      background-color: #fb5a5a;
+    }
   }
 }

@@ -26,7 +26,6 @@ export const makeStep = (coordinate: string) => (dispatch: AppDispatch, getState
 export const cancelStep = () => (dispatch: AppDispatch, getState: () => RootState) => {
   const { savedCheckers, whoseTurn } = getState().generalReducer;
   if (!!savedCheckers.length) {
-    console.log("cancelStep");
     dispatch(
       whoseTurn === BLACK
         ? generalActions.makeBlackStep(savedCheckers)
@@ -41,7 +40,6 @@ export const cancelStep = () => (dispatch: AppDispatch, getState: () => RootStat
 export const cancelStepButton = () => (dispatch: AppDispatch, getState: () => RootState) => {
   const { savedCheckers, whoseTurn } = getState().generalReducer;
   if (!!savedCheckers.length) {
-    console.log("cancelStepButton");
     dispatch(setTurn());
     dispatch(
       whoseTurn === WHITE
