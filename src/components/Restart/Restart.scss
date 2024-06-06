@@ -64,8 +64,8 @@ $restart-margin: 100px 0;
 
 @media (min-width: 1100px) {
   #restart {
-    width: 110px;
-    height: 110px;
+    width: 100px;
+    height: 100px;
     margin: $restart-margin;
     border-radius: 60px;
     font-size: 14px;
@@ -77,7 +77,7 @@ $restart-margin: 100px 0;
     font-size: 16px;
   }
   .restart__answers {
-    height: 110px;
+    height: 100px;
     margin: $restart-margin;
 
     label {
@@ -99,6 +99,7 @@ $restart-margin: 100px 0;
   @media (min-width: 1100px) {
     #restart:hover {
       background-color: #fb5a5a;
+      transform: scale(1.05);
     }
   }
 }
