@@ -57,25 +57,27 @@
 
 @media (min-width: 1100px) {
   #tips {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     border-radius: 100px;
+    border: 10px solid #a00100;
 
     position: absolute;
-    right: -120px;
-    top: 385px;
+    right: -115px;
+    top: 375px;
     margin: 0;
 
     background-color: #f93535;
     color: #780000;
     &:hover {
       background-color: #fb5a5a;
+      transform: scale(1.05);
     }
   }
   .tips__question {
     position: absolute;
-    right: -125px;
-    top: 340px;
+    right: -110px;
+    top: 350px;
     button {
       height: 40px;
     }
@@ -83,9 +85,7 @@
 }
 @media (min-width: 1260px) {
   #tips {
-    right: -150px;
-    width: 80px;
-    height: 80px;
+    right: -155px;
     font-size: 16px;
   }
   .tips__question {
