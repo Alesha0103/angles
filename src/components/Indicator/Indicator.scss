@@ -1,0 +1,84 @@
+.indicator__wrapp {
+  display: flex;
+  justify-content: center;
+  margin: 25px 0;
+
+  .indicator {
+    width: 15px;
+    height: 15px;
+    border-radius: 35px;
+    border: 5px solid #505050;
+  }
+  .indicator__turns {
+    background-color: white;
+    color: black;
+    position: absolute;
+    font-size: 10px;
+    margin-top: 34px;
+    padding: 3px;
+    border-radius: 3px;
+
+    &::before {
+      content: "";
+      display: block;
+      width: 10px;
+      height: 10px;
+      transform: rotate(45deg);
+      background-color: white;
+      position: absolute;
+      top: -5px;
+      left: 44%;
+    }
+  }
+}
+
+@media (min-width: 380px) {
+  .indicator__turns {
+    font-size: 12px !important;
+  }
+}
+
+@media (min-width: 480px) {
+  .indicator__turns {
+    font-size: 14px !important;
+  }
+}
+
+@media (min-width: 1100px) {
+  .indicator__wrapp {
+    margin: 0;
+    position: absolute;
+    right: -93px;
+    top: 200px;
+
+    .indicator {
+      width: 35px;
+      height: 35px;
+      border-width: 10px;
+    }
+    .indicator__turns {
+      padding: 5px;
+      width: 71px;
+      margin-top: 62px;
+    }
+  }
+}
+@media (min-width: 1260px) {
+  .indicator__wrapp {
+    right: -130px;
+  }
+}
+
+@media (min-width: 840px) and (max-width: 1100px) {
+  .indicator__turns {
+    margin: 0 !important;
+    margin-left: 130px !important;
+    padding: 3px 7px !important;
+    &::before {
+      width: 7px !important;
+      height: 7px !important;
+      top: 8px !important;
+      left: -3px !important;
+    }
+  }
+}

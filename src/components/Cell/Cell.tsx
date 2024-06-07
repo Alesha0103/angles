@@ -45,7 +45,6 @@ export const Cell: React.FC<CellProps> = ({type, coordinate}) => {
   }
 
   const finishStep = () => {
-    console.log("finishStep");
     if (memorizedChecker?.coordinate !== savedStep) {
       dispatch(setTurn());
     }

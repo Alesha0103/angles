@@ -7,6 +7,7 @@ import { reloadApp } from './store/actions/GeneralActions';
 import classNames from 'classnames';
 import { Buttons } from './components/Buttons/Buttons';
 import { Tips } from './components/Tips/Tips';
+import { Indicator } from './components/Indicator/Indicator';
 
 const App = () => {
   const checkerBoard = board.getBoard();
@@ -37,6 +38,7 @@ const App = () => {
   return (
     <div className="app">
       <Buttons/>
+      <Indicator />
       <div className={classNames("grid", {"grid__rotate": rotate})}>
         {checkerBoard.map((cell) => (
           <Cell
