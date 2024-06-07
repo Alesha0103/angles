@@ -10,7 +10,7 @@ import {
   setTurn
 } from "../../store/actions/GeneralActions"
 import { useNextStep } from "../../hooks/useNextStep"
-import { BLACK, WHITE } from "../../helpers/constants"
+import { BLACK, DRAW, WHITE } from "../../helpers/constants"
 import classNames from "classnames";
 
 type CellProps = {
@@ -25,10 +25,13 @@ export const Cell: React.FC<CellProps> = ({type, coordinate}) => {
     blackCheckers,
     savedStep,
     memorizedChecker,
-    tips
+    tips,
+    victory
   } = useAppSelector(state => state.generalReducer);
 
   const { nextSteps } = useNextStep();
+
+  const checkDraw = victory === DRAW;
 
   const checkIfFilling = (): string => {
     const checkWhiteFilling = whiteCheckers.find((checker) => checker === coordinate);
@@ -69,7 +72,7 @@ export const Cell: React.FC<CellProps> = ({type, coordinate}) => {
         "cell_red_border": !!nextSteps.includes(coordinate) && tips
       })}
       onClick={handleClick}
-      style={{cursor: !checkIfFilling() ? "pointer" : ""}}
+      style={{cursor: !checkIfFilling() && !checkDraw ? "pointer" : ""}}
     >
       {checkIfFilling() && (
         <Checker coordinate={coordinate} type={checkIfFilling()}/>

@@ -11,6 +11,7 @@ const initialState: CheckersState = {
   whoseTurn: WHITE,
   rotate: false,
   tips: false,
+  victory: "",
 }
 
 const generalSlice = createSlice({
@@ -38,10 +39,14 @@ const generalSlice = createSlice({
     setTips(state, action: PayloadAction<boolean>) {
       state.tips = action.payload;
     },
+    setVictory(state, action: PayloadAction<string>) {
+      state.victory = action.payload;
+    },
     reloadApp(state, action: PayloadAction<any>) {
       state.whiteCheckers = action.payload.whiteCheckers;
       state.blackCheckers = action.payload.blackCheckers;
       state.whoseTurn = action.payload.whoseTurn;
+      state.tips = action.payload.tips;
     },
     rotateBoard(state) {
       state.rotate = !state.rotate;

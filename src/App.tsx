@@ -8,6 +8,7 @@ import classNames from 'classnames';
 import { Buttons } from './components/Buttons/Buttons';
 import { Tips } from './components/Tips/Tips';
 import { Indicator } from './components/Indicator/Indicator';
+import { Victory } from './components/Victory/Victory';
 
 const App = () => {
   const checkerBoard = board.getBoard();
@@ -20,12 +21,16 @@ const App = () => {
     const whiteCheckersStorage = localStorage.getItem("whiteCheckers");
     const blackCheckersStorage = localStorage.getItem("blackCheckers");
     const whoseTurnStorage = localStorage.getItem("whoseTurn");
+    const tipsStorage = localStorage.getItem("tips");
+    const victoryStorage = localStorage.getItem("victory");
 
     if (whiteCheckersStorage && blackCheckersStorage && whoseTurnStorage) {
       const data = {
         whiteCheckers: whiteCheckersStorage.split(","),
         blackCheckers: blackCheckersStorage.split(","),
         whoseTurn: whoseTurnStorage,
+        tips: !!tipsStorage && tipsStorage === "true" ? true : false,
+        victory: victoryStorage,
       }
       dispatch(reloadApp(data));
     }
@@ -49,6 +54,7 @@ const App = () => {
         ))}
       </div>
       <Tips/>
+      <Victory />
     </div>
   );
 }
