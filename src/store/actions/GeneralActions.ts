@@ -40,12 +40,12 @@ export const cancelStep = () => (dispatch: AppDispatch, getState: () => RootStat
 export const cancelStepButton = () => (dispatch: AppDispatch, getState: () => RootState) => {
   const { savedCheckers, whoseTurn } = getState().generalReducer;
   if (!!savedCheckers.length) {
-    dispatch(setTurn());
     dispatch(
       whoseTurn === WHITE
         ? generalActions.makeBlackStep(savedCheckers)
         : generalActions.makeWhiteStep(savedCheckers)
     );
+    dispatch(setTurn());
     dispatch(generalActions.saveCheckers([]));
   }
 } // good
@@ -65,19 +65,32 @@ export const memorizeChecker = (memorizedChecker: MemorizedChecker | null) =>
   generalActions.memorizeChecker(memorizedChecker); // good
 
 export const setTurn = () => (dispatch: AppDispatch, getState: ()=> RootState) => {
-  const { whoseTurn, whiteCheckers, blackCheckers } = getState().generalReducer;
+  const { whoseTurn, whiteCheckers, blackCheckers, victory } = getState().generalReducer;
+  if (victory) {
+    return;
+  }
 
   localStorage.setItem("whiteCheckers", whiteCheckers.toString());
   localStorage.setItem("blackCheckers", blackCheckers.toString());
   localStorage.setItem("whoseTurn", whoseTurn === BLACK ? WHITE : BLACK);
 
-  dispatch(generalActions.setTurn(whoseTurn === BLACK ? WHITE : BLACK)); 
+  dispatch(generalActions.setTurn(whoseTurn === BLACK ? WHITE : BLACK));
 } // good
 
 export const reloadApp = (data: any) => generalActions.reloadApp(data); // good
 export const rotateBoard = () => generalActions.rotateBoard(); // good
+
 export const resetApp = () => {
   localStorage.clear();
   return generalActions.resetApp()
 }; // good
-export const setTips = (state: boolean) => generalActions.setTips(state); // good
+
+export const setTips = (state: boolean) => {
+  localStorage.setItem("tips", state.toString());
+  return generalActions.setTips(state)
+}; // good
+
+export const setVictory = (who: string) => {
+  localStorage.setItem("victory", who);
+  return generalActions.setVictory(who);
+} // good 

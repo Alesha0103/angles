@@ -7,6 +7,7 @@ export type CheckersState = {
   whoseTurn: string,
   rotate: boolean,
   tips: boolean,
+  victory: string,
 }
 export type MemorizedChecker = {
   type: string,

@@ -1,12 +1,12 @@
 import React from "react";
-import { WHITE } from "../../helpers/constants";
+import { BLACK, DRAW, WHITE } from "../../helpers/constants";
 import { useAppSelector } from "../../hooks/redux";
 
 import "./Indicator.scss";
 
 export const Indicator: React.FC = () => {
   const [ hover, setHover ] = React.useState(false);
-  const { whoseTurn } = useAppSelector(state => state.generalReducer);
+  const { whoseTurn, victory } = useAppSelector(state => state.generalReducer);
 
   const onMouseEnter = () => {
     setHover(true);
@@ -18,6 +18,23 @@ export const Indicator: React.FC = () => {
     setHover(!hover)
   }
 
+  const checkBG = () => {
+    let bg: string = "";
+    if (whoseTurn === WHITE) {
+      bg = "white";
+     }
+     if (whoseTurn === BLACK) {
+      bg = "grey";
+     }
+    if (victory === DRAW) {
+      bg = "linear-gradient(to right, white 50%, grey 50%)";
+    }
+    if (victory && victory !== DRAW) {
+      bg = victory === WHITE ? "white" : "grey";
+     }
+    return bg;
+  }
+
   return (
     <>
       <div className="indicator__wrapp"
@@ -25,12 +42,12 @@ export const Indicator: React.FC = () => {
         onMouseLeave={onMouseLeave}
         onClick={onClick}
       >
-        {hover && (
+        {hover && !victory && (
           <label className="indicator__turns">
             {whoseTurn === WHITE ? "White's turn" : "Black's turn"}
           </label>
         )}
-        <div className="indicator" style={{ backgroundColor: whoseTurn === WHITE ? "white" : "grey" }}/>
+        <div className="indicator" style={{ background: checkBG() }}/>
       </div>
     </>
   )

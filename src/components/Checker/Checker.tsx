@@ -6,7 +6,7 @@ import {
   saveFirstStep,
 } from "../../store/actions/GeneralActions";
 import classNames from 'classnames';
-import { BLACK, WHITE } from '../../helpers/constants';
+import { BLACK, DRAW, WHITE } from '../../helpers/constants';
 
 type CheckerProps = {
   coordinate: string,
@@ -17,10 +17,16 @@ export const Checker:React.FC<CheckerProps> = ({ coordinate, type }) => {
 
   const {
     memorizedChecker,
-    whoseTurn
+    whoseTurn,
+    victory
   } = useAppSelector(state => state.generalReducer);
 
+  const checkDraw = victory === DRAW;
+
   const handleClick = () => {
+    if(checkDraw) {
+      return;
+    }
     if (type === whoseTurn) {
       if (memorizedChecker?.coordinate) {
         return;
@@ -40,7 +46,7 @@ export const Checker:React.FC<CheckerProps> = ({ coordinate, type }) => {
         "checker__black": type === BLACK,
       })}
       style={{
-        cursor: !!memorizedChecker ||  (type !== whoseTurn) ? "default" : ""
+        cursor: checkDraw || !!memorizedChecker ||  (type !== whoseTurn) ? "default" : ""
       }}
       onClick={handleClick}
     />

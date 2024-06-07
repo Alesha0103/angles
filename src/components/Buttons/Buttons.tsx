@@ -12,16 +12,19 @@ export const Buttons = () => {
   const {
     whoseTurn,
     memorizedChecker,
-    savedCheckers
+    savedCheckers,
+    victory
   } = useAppSelector(state => state.generalReducer);
 
   const prevTurn = usePrevious(whoseTurn);
+
+  const disabledCancelOnVictory = !!victory && !memorizedChecker;
 
   const onCancelClick = () => {
     if (memorizedChecker) {
       dispatch(cancelStep());
     }
-    if (!memorizedChecker && prevTurn && prevTurn !== whoseTurn) {
+    if (!memorizedChecker && prevTurn && prevTurn !== whoseTurn && !victory) {
       dispatch(cancelStepButton());
     }
   }
@@ -32,7 +35,7 @@ export const Buttons = () => {
   return (
     <div className="buttons">
       <button
-        disabled={!savedCheckers.length}
+        disabled={!savedCheckers.length || disabledCancelOnVictory}
         onClick={onCancelClick}
         className="buttons__default"
       >
