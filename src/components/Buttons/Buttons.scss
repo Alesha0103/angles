@@ -93,6 +93,7 @@
       &:disabled {
         &:hover {
           background-color: #f93535;
+          transform: scale(1);
         }
       }
     }
